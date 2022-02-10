@@ -1,11 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const Cycle = require("../models/Cycle");
+const BookDetails = require("../models/BookDetails");
 const jwt = require("jsonwebtoken");
 const config = require("config");
+const auth = require("../middleware/auth");
 
-// @route    POST api/users
-// @desc     Register a user
+// @route    POST api/addcycle
+// @desc     Add a cycle
 // @access   Public
 router.post("/", async (req, res) => {
   const {
@@ -33,12 +35,12 @@ router.post("/", async (req, res) => {
   }
 });
 
-// @route    GET api/users
+// @route    GET api/cycle
 // @desc     Get a user
 // @access   Public
 router.get("/", async (req, res) => {
   let cycle = await Cycle.find();
-  await res.send(cycle);
+  res.status(200).send(cycle);
 });
 
 module.exports = router;
